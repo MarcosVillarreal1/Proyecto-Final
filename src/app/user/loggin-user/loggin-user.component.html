@@ -1,0 +1,22 @@
+<section class="containerLogin">
+   <form #f="ngForm" (ngSubmit)="f.form.valid && logging(f)">
+      <fieldset>
+         <legend title="Login">Iniciar sesión</legend>
+         <div class="form-group">
+            <label for="name">
+               <i class="fas fa-user"></i>
+               Nombre de usuario:
+            </label>
+            <input type="text" name="name" class="name" id="name" placeholder="Ingrese su nombre de usuario" title="Ingrese su nombre" required ngModel>
+         </div>
+         <div class="form-group">
+            <label for="password">
+               <i class="fas fa-lock"></i>
+               Contraseña:
+            </label>
+            <input type="password" name="password" class="password" id="password" placeholder="Ingrese su contraseña" title="Ingrese su contraseña" required ngModel>
+         </div>
+         <input type="submit" class="btn" id="btn" value="Loguearse" title="Loguearse">
+      </fieldset>
+   </form>
+</section>

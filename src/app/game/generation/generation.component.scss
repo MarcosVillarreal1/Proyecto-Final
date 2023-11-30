@@ -1,0 +1,54 @@
+.modalRegiones {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-image: radial-gradient(circle,rgb(255 255 255) 0%,white 45%,rgb(0, 0, 0) 45%,black 55%,rgb(255, 0, 0) 55%);
+    width: clamp(15rem,40vw,25rem);
+    height: clamp(15rem,40vw,25rem);
+    border-radius: 50%;
+
+    select {
+        width: 50%;
+        padding: 0.3rem;
+        font-size: 0.9rem;
+        border: 0.2rem solid #000000;
+        border-radius: 4px;
+        background-color: #fff;
+        color: #333;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: border-color 0.3s ease;
+        font-weight: 100;
+
+        &:hover {
+            border-color: #999;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: #5c9ce6;
+            box-shadow: 0 0 0 2px #5c9ce6;
+        }
+
+        option {
+            padding: 0.3rem;
+            background-color: #fff;
+            color: #333;
+
+            &:hover {
+                background-color: #f2f2f2;
+            }
+
+            &:checked {
+                background-color: #5c9ce6;
+                color: #fff;
+            }
+        }
+    }
+
+    button {
+        padding: 0.5rem;
+        cursor: pointer;
+    }
+}

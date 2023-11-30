@@ -1,0 +1,87 @@
+<section class="containerPrincipal" *ngIf="show === false; else game">
+    <app-generation (generationSelected)="generationSelected($event)"></app-generation>
+    <button (click)="showGame()" title="Aceptar">Aceptar</button>
+</section>
+
+<div class="overlay" *ngIf="showButton">
+    <img src="../../../assets/logoPoke.jpg" alt="Cargando" title="Cargando">
+</div>
+
+<ng-template #game>
+    <section class="containerTodoWordle">
+        <section class="containerDataWordle">
+            <section class="life">
+                <p class="cantLife" title="{{lives}}">{{lives}}</p>
+                <img src="../../../assets/heart.gif" alt="Vidas" title="Vidas">
+            </section>
+            <img class="signoAyuda" src="../../../assets/ayuda.png" (click)="showTableHelp = true" *ngIf="showHelps" alt="Ayuda" title="Ayuda">
+            <section class="containerInputBtn">
+                <section class="containerInputList" *ngIf="badFinish== false && goodFinish==false">
+                    <input #nombreInput type="text" id="pokemon" name="pokemon"
+                        placeholder="Ingrese el nombre del pokemon" [(ngModel)]="namePokemon"
+                        (input)="filterPokemons(nombreInput.value)" (keydown.enter)="validateGlobal(); pikachuVoice()"
+                        autocomplete="off">
+                    <ul id="lista" class="lista" *ngIf="nombreInput.value != ''">
+                        <li *ngFor="let pokemon of filteredList" class="pokemon"
+                            (click)="selectPokemon(pokemon.getName)" title="{{pokemon.getName}}">
+                            <span class="nombre">{{ pokemon.getName }}</span>
+                        </li>
+                    </ul>
+                </section>
+                <button #adivinarBtn (click)="validateGlobal(); pikachuVoice()"
+                    *ngIf="badFinish== false && goodFinish==false" title="Probar">Probar</button>
+            </section>
+        </section>
+
+        <section class="containerWorleFacil">
+            <section id="container" name="container" class="subContainer">
+                <ul class="contenedorPalabraCompleta">
+                    <li *ngFor="let letter of guessPokemon.getName.split('')" class="contenedorLetra"></li>
+                </ul>
+                <ul *ngFor="let word of words.slice(0, limit), let u = index" class="contenedorPalabraCompleta"
+                    [ngClass]="resetValidation()">
+                    <li *ngFor="let letter of word.split(''); let i = index" [ngClass]="wordColor(letter,i,u)"
+                        class="contenedorLetra" title="{{letter}}">{{letter}}</li>
+                </ul>
+            </section>
+        </section>
+        <section class="containerAyudas" *ngIf="showHelps">
+            <app-helps *ngFor="let stat of pokeUsados.slice(0, limit)" [stat]="stat"
+                [pokemon]="guessPokemon"></app-helps>
+        </section>
+    </section>
+
+    <div class="overlay" *ngIf="goodFinish == true">
+        <div class="containerFinish" title="Ganaste">
+            <p>¡Felicidades, el pokemon era {{this.guessPokemon.getName}} !</p>
+            <button (click)="confirm()" title="Aceptar">Aceptar</button>
+        </div>
+    </div>
+
+    <div class="overlay" *ngIf="badFinish == true">
+        <div class="containerFinish" title="Perdiste">
+            <p>Usted a perdido, el pokemon era {{this.guessPokemon.getName}}</p>
+            <button (click)="confirm()" title="Aceptar">Aceptar</button>
+        </div>
+    </div>
+
+    <div class="overlay" [ngClass]="{ hidden: !showTableHelp }" *ngIf="!acceptButtonPressed">
+        <div class="popup" title="Ayuda">
+            <button class="close-button" (click)="closeTableHelp()" title="Cerrar">X</button>
+            <div class="content">
+                <p>¿Desea una pista con la descripción del Pokemon a adivinar? Perderá una vida si acepta.</p>
+            </div>
+            <button #acceptHelpButton class="accept-button" (click)="acceptHelp()" title="Aceptar">Aceptar</button>
+        </div>
+    </div>
+
+    <div class="overlay" [ngClass]="{ hidden: !showTableHelp }" *ngIf="acceptButtonPressed">
+        <div class="popup" title="Ayuda">
+            <button class="close-button" (click)="closeTableHelp()" title="Cerrar">X</button>
+            <div class="content">
+                <p title="{{ guessPokemon.getDescription }}">{{ guessPokemon.getDescription }}</p>
+            </div>
+            <button class="accept-button" (click)="closeTableHelp()" title="Aceptar">Aceptar</button>
+        </div>
+    </div>
+</ng-template>

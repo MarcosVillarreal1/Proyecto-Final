@@ -1,0 +1,58 @@
+$background-color_1: gray;
+$background-color_2: red;
+$background-color_3: green;
+$background-color_4: orange;
+
+.contenedorAyudas {
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    text-align: center;
+    gap: 2rem;
+
+    @media screen and (max-width: 550px) {
+        gap: 0.6rem;
+
+        li{
+            font-size: 0.8rem;
+        }
+    }
+
+    .contenedorLetra {
+        background-color: gray;
+        display: flex;
+        width: clamp(3rem, 100%, 15rem);
+        height: clamp(1rem, 50%, 6rem);
+        align-items: center;
+        justify-content: center;
+        border-radius: 20%;
+        border: 0.125rem solid black;
+    }
+
+    .contenedorLetra.rojo {
+        background-color: $background-color_2;
+    }
+
+    .contenedorLetra.verde {
+        background-color: $background-color_3;
+    }
+
+    .contenedorLetra.naranja {
+        background-color: $background-color_4;
+    }
+
+    li {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 2.5rem;
+        }
+
+        .especial {
+            width: clamp(3rem, 45%, 15rem);
+        }
+    }
+}

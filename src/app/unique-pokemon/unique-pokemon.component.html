@@ -1,0 +1,40 @@
+<main class="mainUniquePokemon">
+    <section id="cuerpo">
+        <div id="cabecera-datos" [ngClass]="isPokemonType(pokemon.getType1)">
+            <h3 id="nombre">{{pokemon.getName}}</h3>
+            <p id="descripcion">{{pokemon.getDescription}}</p>
+        </div>
+
+        <div class="containerStats" [ngClass]="isPokemonType(pokemon.getType1)">
+            <ul id="stats">
+                <li id="vida">Vida: {{pokemon.getHp}}</li>
+                <li id="ataque">Ataque: {{pokemon.getAtk}}</li>
+                <li id="defensa">Defensa: {{pokemon.getDefense}}</li>
+                <li id="ataque-especial">Ataque Especial: {{pokemon.getSpecialAtk}}</li>
+                <li id="defensa-especial">Defensa Especial: {{pokemon.getSpecialDef}}</li>
+                <li id="velocidad">Velocidad: {{pokemon.getSpeed}}</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="sectionImgUniquePokemon">
+        <div id="imagen-tipo">
+            <img id="foto" [src]="isClicked ? pokemonBackImageSrc : pokemonFrontImageSrc"
+                [ngClass]="isPokemonType(pokemon.getType1)" (click)="toggleClick()" (mouseover)="toggleHover()"
+                (mouseout)="toggleHover()" alt="{{pokemon.getName}}" title="{{pokemon.getName}}">
+            <ul id="lista-tipo">
+                <li [ngClass]="isPokemonType(pokemon.getType1)">{{pokemon.getType1}}</li>
+                <li *ngIf="pokemon.getType2 !== 'none'" [ngClass]="isPokemonType(pokemon.getType2)">{{pokemon.getType2}}
+                </li>
+            </ul>
+        </div>
+        <ul class="containerRegion-Huevo" [ngClass]="isPokemonType(pokemon.getType1)">
+            <li id="region">Generacion
+                <p>{{pokemon.getGeneration}}</p>
+            </li>
+            <li id="groupEgg">Grupo Huevo
+                <p>{{pokemon.getEggGroup}}</p>
+            </li>
+        </ul>
+    </section>
+</main>
